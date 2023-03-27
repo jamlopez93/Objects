@@ -4,8 +4,7 @@ const openModalBtn = document.querySelector(".btn-open");
 const closeModalBtn = document.querySelector(".btn-close");
 const form = document.querySelector('form');
 const grid = document.querySelector('#grid');
-
-
+const formDataArray = [];
 
 
 const openModal = function () {
@@ -27,12 +26,12 @@ overlay.addEventListener("click", closeModal);
 form.addEventListener('submit', function(event) {
   event.preventDefault(); 
   const formData = new FormData(event.target); 
-  const title = formData.get('title'); // Get the value of the "name" field
+  const title = formData.get('title'); 
   const author = formData.get('author');
   const pages = formData.get('pages');
-  const isRead = formData.get('isRead'); // Get the value of the "email" field
+  const isRead = formData.get('isRead'); 
   const read = isRead ? 'Read' : 'Not Read';    
-  const div = document.createElement('div'); // Create a new <div> element
+  const div = document.createElement('div'); 
   const titleParagraph = document.createElement('p');
     titleParagraph.textContent = `Title: ${title}`;
     div.appendChild(titleParagraph);
@@ -45,7 +44,15 @@ form.addEventListener('submit', function(event) {
   const readParagraph = document.createElement('p');
     readParagraph.textContent = `${read}`;
     div.appendChild(readParagraph);
-  grid.appendChild(div); // Append the <div> element to the grid
+  grid.appendChild(div); 
+  const formDataObject = {
+    title,
+    author,
+    pages,
+    isRead: isRead ? true : false 
+  };
+  formDataArray.push(formDataObject);
+  console.log(formDataArray);
   closeModal();
 });
 
