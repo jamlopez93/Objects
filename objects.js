@@ -45,12 +45,20 @@ form.addEventListener('submit', function(event) {
     readParagraph.textContent = `${read}`;
     div.appendChild(readParagraph);
   grid.appendChild(div); 
-  const formDataObject = {
-    title,
-    author,
-    pages,
-    isRead: isRead ? true : false 
+  function createFormDataObject(formData){
+    const title = formData.get('title'); 
+    const author = formData.get('author');
+    const pages = formData.get('pages');
+    const isRead = formData.get('isRead'); 
+    const read = isRead ? 'Read' : 'Not Read';
+    return {
+      title,
+      author,
+      pages,
+      read
+    };
   };
+  const formDataObject = createFormDataObject(formData);
   formDataArray.push(formDataObject);
   console.log(formDataArray);
   closeModal();
